@@ -1,0 +1,19 @@
+<div class="quote-wrapper" *ngIf="type === 'text' && showQuote">
+    <div class="quote-content">
+        <p class="quote-body">{{quote.quote}}</p>
+        <p class="quote-author">{{quote.author}}
+            <i class="fas fa-star save-fav" title="Save quote to Favorite" (click)="saveQuoteToFavorite()"></i></p>
+    </div>
+</div>
+
+<ng-container *ngIf="type === 'settings'">
+    <div class="setting-item">
+        <mat-slide-toggle (change)="onOffQuote($event)" [checked]="showQuote">Off/On</mat-slide-toggle>
+    </div>
+    <div class="fav-quotes setting-item">
+        <h4>Favourite Quotes</h4>
+        <ul>
+            <li *ngFor="let quote of favoriteQuotes">{{quote.quote}}</li>
+        </ul>
+    </div>
+</ng-container>

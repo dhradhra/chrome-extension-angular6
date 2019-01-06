@@ -1,0 +1,122 @@
+<div class="full-view">
+    <div class="columns">
+        <div class="column"
+             *ngFor="let layers of verticalLayers; let columnIdx = index"
+        >
+            <div class="column-layer"
+                 *ngFor="let layer of layers; let layerIdx = index"
+                 [ngStyle]="{
+                    'height.px': layer ? layer.height : 0,
+                    'flex': layer ? layer.flex : 'unset'
+                 }"
+            >
+                <ng-container *ngIf="layer !== null">
+                    <!-- GHOST AREA TOP -->
+                    <app-full-view-ghost
+                        *ngIf="layer.showTopGhost"
+                        [ngStyle]="{
+                            'height.px': draggingWidget.settings.height,
+                            width: layer.ghostWidth,
+                            'margin-left': layer.ghostLeftMargin
+                        }"
+                    ></app-full-view-ghost>
+                    <!-- DROPPABLE AREA -->
+                    <div class="droppable-area-wrapper"
+                         *ngIf="draggingWidget"
+                    >
+                        <div class="droppable-area-item">
+                            <div mwlDroppable
+                                 class="droppable-area"
+                                 dragOverClass="drop-over-active"
+                                 (dragEnter)="onDragEnter($event, layer, 'up-left', layers, columnIdx, layerIdx)"
+                            ></div>
+                            <div *ngIf="!layer.isSpacer && layer.hasBottomDraggableArea"
+                                 mwlDroppable
+                                 class="droppable-area"
+                                 dragOverClass="drop-over-active"
+                                 (dragEnter)="onDragEnter($event, layer, 'down-left', layers, columnIdx, layerIdx)"
+                            ></div>
+                        </div>
+                        <div class="droppable-area-item">
+                            <div mwlDroppable
+                                 class="droppable-area"
+                                 dragOverClass="drop-over-active"
+                                 (dragEnter)="onDragEnter($event, layer, 'up-right', layers, columnIdx, layerIdx)"
+                            ></div>
+                            <div *ngIf="!layer.isSpacer && layer.hasBottomDraggableArea"
+                                 mwlDroppable
+                                 class="droppable-area"
+                                 dragOverClass="drop-over-active"
+                                 (dragEnter)="onDragEnter($event, layer, 'down-right', layers, columnIdx, layerIdx)"
+                            ></div>
+                        </div>
+                    </div>
+                    <!-- WIDGETS AREA -->
+                    <div class="widgets-wrapper"
+                         *ngIf="layer.units.length"
+                         [ngStyle]="{
+                            'width': layer.widgetsWrapperWidth,
+                            'margin-left': layer.widgetsWrapperLeftMargin,
+                            'margin-right': layer.widgetsWrapperRightMargin,
+                            'flex': layer.widgetsWrapperFlex
+                         }"
+                    >
+                        <div class="widget"
+                             *ngFor="let unit of layer.units"
+                             [style.height.px]="unit.widget.settings.height"
+                             [class.blur]="blur"
+                             [class.small-widget]="unit.widget.settings.cellsCount === 1"
+                             [class.small-right-widget]="unit.position.horizontalLayer === 1"
+                             mwlDraggable
+                             [dropData]="{widget: unit.widget}"
+                             (dragStart)="onDragStart($event, 'user', unit.widget, layer, unit)"
+                             (dragEnd)="onDragEnd($event, 'user', unit, layer, layers, columnIdx)"
+                             [ghostElementAppendTo]="document.body"
+                             [validateDrag]="getValidateDragFn()"
+                             dragActiveClass="drag-active"
+                        >
+                            <div class="widget-settings-wrapper">
+                                <mat-icon class="drag-icon"
+                                          fontSet="fa"
+                                          fontIcon="fa-arrows-alt"
+                                          (mouseover)="onDragIconOver($event)"
+                                          (mouseout)="onDragIconOut($event)"
+                                ></mat-icon>
+                                <mat-icon
+                                    class="remove-icon"
+                                    fontSet="fa"
+                                    fontIcon="fa-times"
+                                    (click)="removeUnit(unit, layer)"
+                                ></mat-icon>
+                            </div>
+                            <div class="widget-content">
+                                <ng-container
+                                    [ngComponentOutlet]="unit.widget.component"
+                                    [ndcDynamicInputs]="{type: 'full', settings: unit.widget.settings}"
+                                ></ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- GHOST AREA BOTTOM -->
+                    <app-full-view-ghost
+                        *ngIf="layer.showBottomGhost"
+                        [ngStyle]="{
+                           'height.px': draggingWidget.settings.height,
+                           width: layer.ghostWidth,
+                           'margin-left': layer.ghostLeftMargin
+                        }"
+                    ></app-full-view-ghost>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #addWidgetModal class="popover" panelClass="popover">
+    <app-widgets-add-popup
+        *ngIf="widgets"
+        [widgets]="widgets"
+        (dragStart)="onDragStart($event)"
+        (dragEnd)="onDragEnd($event)"
+    ></app-widgets-add-popup>
+</ng-template>

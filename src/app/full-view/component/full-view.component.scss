@@ -1,0 +1,156 @@
+.widget {
+    padding: 5px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+        .widget-settings-wrapper {
+            opacity: 0.5;
+        }
+    }
+
+    .widget-settings-wrapper {
+        position: absolute;
+        right: 7px;
+        top: 7px;
+        height: 50px;
+        transition-duration: .3s;
+        z-index: 10;
+        opacity: 0;
+        font-size: 18px;
+        margin-right: 5px;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+.full-view {
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+
+    .columns {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        flex: 1;
+        overflow-x: hidden;
+        overflow-y: auto;
+        align-items: initial;
+
+        .column {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            color: white;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            position: relative;
+            flex-direction: column;
+
+            .widget {
+                width: 100%;
+                border-radius: 15px;
+
+                &.widget-half {
+                    width: 50%;
+                }
+
+                &.widget-full {
+                    width: 100%;
+                    height: 100%;
+                }
+
+                &.blur {
+                    filter: blur(5px);
+                }
+
+                .widget-content {
+                    height: 100%;
+                }
+            }
+
+            .column-layer {
+                display: flex;
+                position: relative;
+                z-index: 5;
+                flex-direction: row;
+                //flex-direction: column;
+                flex-wrap: wrap;
+
+                &.column-layer-empty {
+                    flex: 1;
+                }
+
+                .widgets-wrapper {
+                    position: relative;
+                    flex: 1;
+                    display: flex;
+                    flex-direction: row;
+
+                    &.full-row {
+                        flex: unset;
+                        width: 100%;
+                    }
+
+                    .remove-icon {
+                        color: rgba(255, 100, 100, .8);
+                    }
+                }
+
+                .has-left-space {
+                    margin-left: 50%;
+                }
+
+                .has-right-space {
+                    margin-right: 50%;
+                }
+
+                .droppable-area-wrapper {
+                    display: flex;
+                    //flex-direction: column;
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 7;
+
+                    .droppable-area-item {
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+
+                        .droppable-area {
+                            flex: 1;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+::ng-deep .mat-menu-panel.popover {
+    margin: 20px;
+}
+
+::ng-deep .widget.drag-active .widget-content {
+    height: 100%;
+}
+
+::ng-deep body > .widget.drag-active {
+    z-index: 9999;
+
+    &.small-widget {
+        width: 12.5vw !important;
+
+        &.small-right-widget {
+            margin-left: 12.5vw !important;
+        }
+    }
+}

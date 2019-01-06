@@ -1,0 +1,122 @@
+.app-add-widget-modal-overlay {
+    border-radius: 15px;
+    max-height: 90%;
+    max-width: 90vw !important;
+    overflow: auto;
+    padding: 15px;
+    opacity: 0.8;
+    background-color: black;
+    width: 38vw;
+    height: 650px;
+
+    .mat-dialog-container {
+        background-color: transparent;
+        padding: 0;
+        box-shadow: none;
+        max-height: unset;
+    }
+}
+
+.add-widget-popup-wrapper {
+    height: 100%;
+    width: 100%;
+    color: white;
+    max-width: unset;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    .add-widget-popup-content {
+        border-radius: 6px;
+        height: 100%;
+        width: 100%;
+        overflow-y: auto;
+        margin: 0;
+        text-align: left;
+        box-sizing: border-box;
+
+        .widget-info {
+            height: 100%;
+
+            .widget-component-wrapper {
+                height: 100%;
+                position: relative;
+
+                &.small {
+                    width: 50%;
+                    margin: 0 auto;
+                }
+
+                .widget-settings-wrapper {
+                    position: absolute;
+                    right: 7px;
+                    top: 7px;
+                    height: 50px;
+                    z-index: 10;
+                    font-size: 18px;
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        .mat-tab-labels {
+            display: flex;
+            position: relative;
+            flex-direction: column;
+        }
+
+        .mat-tab-group {
+            flex-direction: unset !important;
+            height: 100%;
+        }
+
+        .mat-tab-header {
+            width: 30%;
+            float: left;
+        }
+
+        .mat-tab-body-wrapper {
+            float: left;
+            width: 70%;
+        }
+
+        .mat-ink-bar {
+            background-color: #c2185b;
+            display: none !important;
+        }
+
+        .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+            display: none !important;
+        }
+
+        .mat-tab-label {
+            height: 35px !important;
+            padding: 0px 20px !important;
+            cursor: pointer;
+            box-sizing: border-box;
+            opacity: .6;
+            min-width: 160px;
+            text-align: left !important;
+            display: inline-flex;
+            justify-content: left !important;
+        }
+
+        .mat-tab-label-container {
+            border-right: 1px solid #ffffff52;
+        }
+
+    }
+}
+
+body > .widget-component-wrapper.drag-active {
+    z-index: 9999;
+
+    .widget-settings-wrapper {
+        position: absolute;
+        right: 7px;
+        top: 7px;
+        height: 50px;
+        z-index: 10;
+        font-size: 18px;
+        margin-right: 5px;
+    }
+}

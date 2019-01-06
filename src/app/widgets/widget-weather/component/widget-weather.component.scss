@@ -1,0 +1,92 @@
+.icon-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+app-widget-weather {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    cursor: pointer;
+    .weather-status {
+        font-size: 25px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        .temp {
+            margin-left: 5px;
+        }
+    }
+    .weather-image {
+        width: 30px;
+    }
+    .weather-location {
+        font-size: 11px;
+        text-align: center;
+    }
+    .weather-info {
+        font-size: 10px;
+        text-align: left;
+    }
+    .weather-location {
+        text-align: left!important;
+        margin-top: 3px;
+    }
+}
+
+.weather-full-wrapper {
+    .weather-address {
+        min-width: 200px;
+        min-height: 40px;
+        display: block;
+    }
+    .results-wrapper {
+        .weather-status {
+            margin: 0 8px;
+            .low-temp {
+                opacity: 0.6;
+            }
+        }
+        .day {
+            text-align: center;
+            margin-top: 5px;
+        }
+    }
+}
+.wi {
+    font-size: 30px;
+    margin: 5px;
+}
+.weather-status
+{
+    font-size: 12px;
+}
+.mat-menu-panel.weather-full-wrapper {
+    border-radius: 10px;
+}
+.weather-full-wrapper .results-wrapper .weather-status
+{
+    margin: 0!important;
+    padding: 0 8px;
+}
+.weather-bar:not(:last-child){
+    border-right: 1px solid #ffffff52;
+}
+.mat-menu-panel.weather-full-wrapper .mat-menu-content .results-wrapper {
+    padding: 10px 5px!important;
+}
+
+span.mat-slide-toggle-label.mat-slide-toggle-content.temp-custom {
+    display: inline;
+    margin-right: 7px;
+}
+
+.weather-address{
+    background: #000;
+    padding:5px 10px 0 10px;
+}
+.mat-form-field {
+    display: block;
+}

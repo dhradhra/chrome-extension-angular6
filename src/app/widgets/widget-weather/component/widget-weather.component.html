@@ -1,0 +1,55 @@
+<app-widget [type]="type" [frozen]="frozen" [hide]="hide" [opened]="opened">
+    <app-widget-icon>
+        <!--<div [matMenuTriggerFor]="weather">-->
+        <!--<div class="weather-status">-->
+        <span [innerHTML]="weatherIcon()" title="{{currentStatus}}" class="icon-button"></span>
+        <!--<span class="temp"> {{currentTemperature}}°</span>-->
+        <!--</div>-->
+        <!--<div class="weather-info">-->
+        <!--Wind: Dir.: {{currentWind.direction}}°, speed: {{currentWind.speed}}{{currentUnit.speed}}-->
+        <!--</div>-->
+        <!--<div class="weather-info">-->
+        <!--Atmosphere: Humidity.: {{currentAtmosphere.humidity}}%, Pressure: {{currentAtmosphere.pressure}}{{currentUnit.pressure}}-->
+        <!--</div>-->
+        <!--<div class="weather-info">-->
+        <!--Astronomy: Sunrise.: {{currentAstronomy.sunrise}}, Sunset: {{currentAstronomy.sunset}}-->
+        <!--</div>-->
+        <!--<div class="weather-location">{{weatherLocation}}</div>-->
+        <!--</div>-->
+    </app-widget-icon>
+    <app-widget-full>
+        <div class="weather-full-wrapper">
+            <div class="weather-address" [hidden]="!showAddress" (click)="$event.stopPropagation()">
+                <mat-form-field>
+                    <input matInput placeholder="Enter location name/zip code"  [(ngModel)]="userAddress" (change)="updateUserSettingsAddress(userAddress)" autocomplete="off" spellcheck="false">
+                </mat-form-field>
+            </div>
+            <div class="results-wrapper flex-center" (click)="$event.stopPropagation()">
+                <div class="weather-status weather-bar" *ngFor="let weather of weatherDatas.slice(1).slice(0, 5)">
+                    <div>
+                        <span [innerHTML]="weatherIcon(weather.conditionCode.toString())" title="{{weather.condition}}"></span>
+                    </div>
+                    <div>
+                        <span> {{weather.high}}°</span>
+                        <span class="low-temp"> {{weather.low}}°</span>
+                    </div>
+                    <div class="day">{{weather.day}}</div>
+                </div>
+            </div>
+        </div>
+    </app-widget-full>
+    <app-widget-settings>
+        <div class="setting-item">
+            <mat-slide-toggle (change)="onLocationSettingsChange($event)" [checked]="FindAutoAddress">Find location automatically</mat-slide-toggle>
+        </div>
+        <div class="toggle-temp setting-item" (click)="$event.stopPropagation()">
+            <span class="mat-slide-toggle-label mat-slide-toggle-content temp-custom">°C</span>
+            <mat-slide-toggle (change)="onChangeTempUnit($event)" [checked]="isFahrenheit">°F</mat-slide-toggle>
+        </div>
+        <div class="setting-item" [hidden]="!showAddress">
+            <mat-form-field>
+                <input matInput placeholder="Enter location name/zip code" [(ngModel)]="userAddress" (keyup)="updateUserSettingsAddress(userAddress)" autocomplete="off" spellcheck="false">
+            </mat-form-field>
+        </div>
+    </app-widget-settings>
+</app-widget>

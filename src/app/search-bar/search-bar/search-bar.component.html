@@ -1,0 +1,23 @@
+<div class="searchbar-wrapper">
+    <form (ngSubmit)="searchGoogle()">
+        <div class="search-input">
+            <label class="search" for="inpt_search">
+                <input id="inpt_search"
+                       [(ngModel)]="searchInput"
+                       [ngModelOptions]="{standalone: true}"
+                       (keyup)="onKeyup()"
+                       autocomplete="off"
+                       spellcheck="false"
+                       placeholder="Search..." />
+                <span class="input-highlight">{{highlightText}}</span>
+            </label>
+            <div class="search-icons" [ngClass]="{'show' : searchInput && searchInput.length > 1}">
+                <div class="google-icon" title="Search with Google" (click)="searchGoogle()"></div>
+                <div class="amazon-icon" title="Search with Amazon" (click)="searchAmazon()"></div>
+                <div class="ebay-icon" title="Search with Ebay" (click)="searchEbay()"></div>
+                <div class="walmart-icon" title="Search with Walmart" (click)="searchWalmart()"></div>
+                <div class="aliexpress-icon" title="Search with Aliexpress" (click)="searchAliexpress()"></div>
+            </div>
+        </div>
+    </form>
+</div>

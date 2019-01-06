@@ -1,0 +1,33 @@
+<div [ngSwitch]="type" class="app-widget-cpm">
+    <ng-container *ngSwitchCase="'icon'">
+        <ng-container *ngTemplateOutlet="icon"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="'full'">
+        <ng-container *ngTemplateOutlet="full"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="'settings'">
+        <ng-container *ngTemplateOutlet="settings"></ng-container>
+    </ng-container>
+</div>
+
+<ng-template #icon>
+    <div class="widget-icon-wrapper" mat-button (click)="iconClick()">
+        <ng-content select="app-widget-icon"></ng-content>
+    </div>
+</ng-template>
+
+<ng-template #full>
+    <div class="app-widget-full-wrapper">
+        <div class="app-widget-full-content" (click)="$event.stopPropagation()">
+            <ng-content select="app-widget-full"></ng-content>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #settings>
+    <div class="app-widget-settings-wrapper">
+        <div class="app-widget-settings-content">
+            <ng-content select="app-widget-settings"></ng-content>
+        </div>
+    </div>
+</ng-template>

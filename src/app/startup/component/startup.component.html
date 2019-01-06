@@ -1,0 +1,8 @@
+<div class="title">Hello, what's your name?</div>
+<div>
+    <form (ngSubmit)="saveUsername()">
+        <mat-form-field>
+            <input matInput [(ngModel)]="username" [ngModelOptions]="{standalone: true}" autocomplete="off" spellcheck="false">
+        </mat-form-field>
+    </form>
+</div>

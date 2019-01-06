@@ -1,0 +1,17 @@
+<app-widget [type]="type" [frozen]="frozen" [hide]="hide" [opened]="opened">
+    <app-widget-icon>
+        <mat-icon [fontSet]="settings.fontSet" [fontIcon]="settings.fontIcon"></mat-icon>
+    </app-widget-icon>
+    <app-widget-full>
+        <div class="full-wrapper">
+            <div class="iframe-wrapper">
+                <iframe height="100%" width="100%"
+                        [src]="url"
+                        sandbox="allow-same-origin allow-popups allow-forms allow-scripts allow-top-navigation"
+                        seamless=""
+                        frameborder="0" style="border:0"
+                ></iframe>
+            </div>
+        </div>
+    </app-widget-full>
+</app-widget>

@@ -1,0 +1,128 @@
+body {
+    color: rgba(255, 255, 255, .9);
+    font-family: "Whitney-Light", sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.4px;
+}
+
+input,
+span {
+    letter-spacing: 0.6px;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: transform .3s ease-out;
+    animation: fadein .5s ease-out 0s forwards;
+    background-color: transparent;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+#main-content {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.mat-menu-panel.popover {
+    color: white;
+    opacity: 0.8;
+    max-width: unset;
+    border-radius: 15px;
+    .mat-menu-content {
+        padding: 0;
+        .popover-wrapper {
+            background-color: black;
+            padding: 10px;
+        }
+    }
+}
+
+.mat-menu-panel.widget {
+    background: transparent;
+    border-radius: 15px;
+    margin-left: 60px;
+    min-width: 320px;
+
+    .mat-menu-content {
+        padding: 0;
+    }
+}
+
+.popover {
+    color: white;
+    opacity: 0.8;
+    max-width: unset;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: black;
+
+    .popover-wrapper {
+        padding: 10px;
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+.center {
+    text-align: center;
+}
+
+mat-icon.fa,
+mat-icon.fab,
+mat-icon.far,
+mat-icon.fas,
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-start {
+    justify-content: flex-start;
+}
+
+.widget-component {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    button {
+        border: 0;
+        background: transparent;
+        color: #fff;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        padding: 0;
+        font-size: 24px;
+        min-width: 0;
+
+        mat-icon {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .widget-popover {
+        height: 100%;
+        .popover-wrapper {
+            height: 100%;
+        }
+    }
+}
+
+.cdk-overlay-pane {
+    overflow: auto;
+    max-width: 90vw !important;
+}

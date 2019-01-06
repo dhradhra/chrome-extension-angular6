@@ -1,0 +1,102 @@
+.app-desk {
+    display: flex;
+    position: relative;
+    z-index: 10;
+    flex-direction: column;
+    height: 100%;
+
+    .mat-button {
+        min-width: 25px;
+        width: 25px;
+        padding: 0;
+        font-size: 20px;
+        margin-left: 10px;
+    }
+
+    .add-widget-button {
+        cursor: pointer;
+        font-size: 20px;
+        opacity: .6;
+        transition: 160ms linear;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    .popover {
+        border-radius: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 8px 16px;
+        position: relative;
+        z-index: 10;
+        background-color: transparent;
+
+        app-search-bar {
+            position: absolute;
+            right: 0;
+            margin: 0 20px;
+            top: 12px;
+        }
+
+        .flex-spacer {
+            flex: 1;
+        }
+    }
+
+    ::ng-deep.mat-tab-group {
+        height: 100%;
+
+
+        .mat-tab-header {
+            display: none;
+        }
+
+        .mat-tab-body-wrapper {
+            height: 100%;
+        }
+
+        .main-container {
+            height: 100%;
+            background-color: transparent;
+
+            .mat-drawer {
+                background-color: transparent;
+                display: flex;
+                align-items: center;
+
+                .change-view-button {
+                    height: 100%;
+                    width: 40px;
+                    text-align: center;
+                    min-width: 40px;
+                    padding: 7px;
+                    font-size: 28px;
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    .desk-content {
+        height: 100%;
+        overflow: hidden;
+
+        &.has-left-arrow {
+            margin-left: 40px;
+        }
+
+        &.has-right-arrow {
+            margin-right: 40px;
+        }
+    }
+
+}
+
+mat-toolbar.popover {
+    overflow: visible;
+}
+
+

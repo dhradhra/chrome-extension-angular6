@@ -1,0 +1,39 @@
+.quote-wrapper {
+    width: 70%;
+    height: 40px;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    text-align: center;
+    .quote-content {
+        position: relative;
+        height: 100%;
+        p {
+            margin: 0 auto;
+            position: absolute;
+            left: 0;
+            right: 0;
+            transition: visibility 0.1s, opacity 0.8s, top 0.2s, bottom 0.2s linear;
+        }
+        p.quote-body {
+            top: 15px;
+        }
+        p.quote-author {
+            bottom: 10px;
+            visibility: hidden;
+            opacity: 0;
+        }
+    }
+}
+
+.quote-wrapper:hover {
+    p.quote-body {
+        top: 0;
+    }
+    p.quote-author {
+        bottom: 0;
+        visibility: visible;
+        opacity: 1;
+    }
+}

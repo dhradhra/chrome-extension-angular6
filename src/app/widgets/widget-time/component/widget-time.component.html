@@ -1,0 +1,11 @@
+<app-widget [type]="type" [frozen]="frozen" [hide]="hide" [opened]="opened">
+    <app-widget-icon>
+        <mat-icon fontSet="far" fontIcon="fa-clock"></mat-icon>
+    </app-widget-icon>
+    <app-widget-full>
+        <div class="time-wrapper">
+            <div class="time">{{currentTime | date: 'shortTime'}}</div>
+            <div class="date">{{currentTime | date: 'E LLL d y'}}</div>
+        </div>
+    </app-widget-full>
+</app-widget>

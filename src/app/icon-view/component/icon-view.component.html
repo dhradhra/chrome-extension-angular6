@@ -1,0 +1,87 @@
+<div class="icon-view">
+    <mat-drawer-container class="main-container">
+        <mat-drawer mode="side" opened position="start" class="test">
+            <div class="left-sidebar" #widgetsBar>
+                <!-- WIDGETS AREA -->
+                <div class="widgets-wrapper">
+                    <div class="widget"
+                         *ngFor="let layer of layers; let layerIdx = index"
+                         mwlDraggable
+                         [dropData]="{widget: layer.unit.widget}"
+                         (dragStart)="onDragStart($event, 'user', layer.unit.widget, layer)"
+                         (dragEnd)="onDragEnd($event, 'user', layer)"
+                         [ghostElementAppendTo]="document.body"
+                         dragActiveClass="drag-active"
+                         [validateDrag]="getValidateDragFn()"
+                         [ngClass]="{
+                            'double-height': layer.hasGhost
+                         }"
+                    >
+                        <ng-container *ngIf="!layer.isSpacer">
+                            <div class="widget-content">
+                                <ndc-dynamic
+                                    [ndcDynamicComponent]="layer.unit.widget.component"
+                                    [ndcDynamicInputs]="{
+                                        type: 'icon',
+                                        settings: layer.unit.widget.settings,
+                                        hide: hideOpenedWidgets,
+                                        opened: widgetOpened()
+                                     }"
+                                ></ndc-dynamic>
+                            </div>
+                            <div class="widget-settings-wrapper">
+                                <mat-icon
+                                    class="drag-icon"
+                                    fontSet="fa"
+                                    fontIcon="fa-arrows-alt"
+                                    (mouseover)="onDragIconOver($event)"
+                                    (mouseout)="onDragIconOut($event)"
+                                ></mat-icon>
+                                <mat-icon
+                                    class="remove-icon"
+                                    fontSet="fa"
+                                    fontIcon="fa-times"
+                                    (mouseover)="setWidgetsOverflowHidden($event)"
+                                    (mouseout)="setWidgetsOverflowScroll($event)"
+                                    (click)="removeLayer(layerIdx)"
+                                ></mat-icon>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <!--DROPPABLE AREA-->
+                <div class="droppable-areas-wrapper"
+                     [ngClass]="{
+                        'highlighted': !!this.draggingWidget
+                     }"
+                >
+                    <div *ngFor="let layer of layers; let layerIdx = index" class="droppable-area-wrapper">
+                        <div *ngIf="draggingLayer !== layer"
+                             class="droppable-area"
+                             mwlDroppable
+                             (dragEnter)="onDragEnter($event, layer, layerIdx)"
+                             [ngClass]="{
+                                    'highlighted': !!this.draggingWidget,
+                                    'drop-over-active': layer.hasGhost
+                                 }"
+                        >
+                            <div class="droppable-area-bg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-drawer>
+        <mat-drawer-content>
+            <app-quote></app-quote>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>
+
+<ng-template #addWidgetModal class="popover" panelClass="popover">
+    <app-widgets-add-popup
+        *ngIf="availableWidgets"
+        [widgets]="availableWidgets"
+        (dragStart)="onDragStart($event)"
+        (dragEnd)="onDragEnd($event)"
+    ></app-widgets-add-popup>
+</ng-template>

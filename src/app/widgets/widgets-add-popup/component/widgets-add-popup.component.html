@@ -1,0 +1,33 @@
+<div class="add-widget-popup-wrapper">
+    <div class="add-widget-popup-content">
+        <mat-tab-group headerPosition="above">
+            <mat-tab *ngFor="let widget of widgets" [label]="widget.title">
+                <div class="widget-info">
+                    <div class="widget-component-wrapper" [class.small]="widget.settings.cellsCount === 1"
+                         mwlDraggable
+                         [dropData]="{widget: widget}"
+                         (dragStart)="onDragStart($event, 'available', widget)"
+                         (dragEnd)="onDragEnd($event, 'available')"
+                         [ghostElementAppendTo]="document.body"
+                         [validateDrag]="getValidateDragFn()"
+                         dragActiveClass="drag-active"
+                         [style.height.px]="widget.settings.height"
+                    >
+                        <div class="widget-settings-wrapper">
+                            <mat-icon class="drag-icon"
+                                      fontSet="fa"
+                                      fontIcon="fa-arrows-alt"
+                                      (mouseover)="onDragIconOver($event)"
+                                      (mouseout)="onDragIconOut($event)"
+                            ></mat-icon>
+                        </div>
+                        <ng-container
+                            [ngComponentOutlet]="widget.component"
+                            [ndcDynamicInputs]="{type: 'full', settings: widget.settings}"
+                        ></ng-container>
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

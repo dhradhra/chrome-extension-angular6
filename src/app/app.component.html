@@ -1,0 +1,14 @@
+<!--<div class="background" [@loading]="bgImgLoaded ? 'loaded' : 'loads'"></div>-->
+<div class="background" [@loading]="bgImgLoaded ? 'loads' : 'loaded'"></div>
+
+<div class="loading" [@loading]="isLoading ? 'loads' : 'loaded'"><img src="/assets/images/ajax-loader.gif"></div>
+
+<ng-container *ngIf="!isLoading">
+    <app-startup (usernameChange)="onUsernameChange()" *ngIf="!(hasUserName | async)"></app-startup>
+</ng-container>
+
+<div [@loading]="isLoading ? 'loaded' : 'loads'" id="main-content">
+    <ng-container *ngIf="hasUserName | async">
+        <app-desk></app-desk>
+    </ng-container>
+</div>

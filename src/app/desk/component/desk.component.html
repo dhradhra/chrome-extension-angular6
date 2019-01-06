@@ -1,0 +1,60 @@
+<div class="app-desk">
+    <mat-toolbar class="popover">
+        <app-search-bar (open)="searchBarOpen($event)"></app-search-bar>
+        <div class="flex-spacer"></div>
+        <div matTooltip="Open this view by default">
+            <button mat-button
+                    (click)="setDefaultViewType()"
+                    [disabled]="currentView === defaultView"
+            >
+                <mat-icon fontSet="fa" fontIcon="fa-check" ></mat-icon>
+            </button>
+        </div>
+        <button mat-button (click)="onAddUnit($event)" class="add-widget-button">
+            <mat-icon fontSet="fa" fontIcon="fa-plus"></mat-icon>
+        </button>
+    </mat-toolbar>
+
+
+    <mat-tab-group [selectedIndex]="viewTypeIndex" *ngIf="allWidgets" [@.disabled]="firstLoad">
+        <mat-tab label="icon widgets">
+            <mat-drawer-container class="main-container">
+                <mat-drawer mode="side" opened position="end">
+                    <button mat-button class="change-view-button" (click)="goFullView()">
+                        <mat-icon class="change-view-icon" fontSet="fa" fontIcon="fa-chevron-right"></mat-icon>
+                    </button>
+                </mat-drawer>
+                <mat-drawer-content>
+                    <div class="desk-content has-right-arrow">
+                        <app-icon-view
+                            *ngIf="!!currentView"
+                            [addUnit]="addIconUnit"
+                            [widgets]="iconWidgets"
+                            [viewChangeEvent]="viewChange"
+                        ></app-icon-view>
+                    </div>
+                </mat-drawer-content>
+            </mat-drawer-container>
+        </mat-tab>
+        <mat-tab label="full widgets">
+            <mat-drawer-container class="main-container">
+                <mat-drawer mode="side" opened position="start">
+                    <button mat-button class="change-view-button" (click)="goIconView()">
+                        <mat-icon class="change-view-icon" fontSet="fa" fontIcon="fa-chevron-left"></mat-icon>
+                    </button>
+                </mat-drawer>
+                <mat-drawer-content>
+                    <div class="desk-content has-left-arrow">
+                        <app-full-view
+                            *ngIf="!!currentView"
+                            [addUnit]="addFullUnit"
+                            [widgets]="fullWidgets"
+                            [viewChangeEvent]="viewChange"
+                        ></app-full-view>
+                    </div>
+                </mat-drawer-content>
+            </mat-drawer-container>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>

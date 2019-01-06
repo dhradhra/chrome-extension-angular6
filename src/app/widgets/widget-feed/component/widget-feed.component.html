@@ -1,0 +1,57 @@
+<app-widget [type]="type" [frozen]="frozen" [hide]="hide" [opened]="opened">
+  <app-widget-icon>
+      <mat-icon fontSet="far" fontIcon="fa-clock"></mat-icon>
+  </app-widget-icon>
+  <app-widget-full>
+        <div class="sourceselection">
+                <div>
+                    <div class="jumbotron">
+                        <h2><span class="glyphicon glyphicon-list-alt"></span>&nbsp;News List</h2>
+                        <h4>Select News Source</h4>
+                        <div class="col-sm-3 col-md-4 col-lg-12">
+                            <select class="form-control" [(ngModel)]="sourceItem" (change)="getSoucreDetail(sourceItem)" name='source'>
+                                <option [value]="sourceItem" [disabled]= "true">Select Source</option>
+                                <option *ngFor="let item of sourceArray" [ngValue]="item">
+                                    {{item.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <div>
+                            <h6 style="margin-top: 20px">{{sourceObject?.description}}</h6>
+                            <a style="margin-top: 20px" class="btn btn-primary" target="_blank" [class.disabled]="sourceObject?.url === undefined"
+                             [href]="sourceObject?.url">
+                                Go To  {{sourceObject?.name}}  Website
+                                </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                    <span *ngIf="loading" class="loading"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+                    <span style="font-size: 20px;margin-top:0px;top :0px; text-align: center"></span></span>
+                </div>
+                <div class="newslist">
+                    <div class="container">
+                        <ul class="media-list">
+                            <li class="media" *ngFor="let item of articleArray">
+                                <div class="media-left">
+                                    <a target="_blank">
+                                        <img class="media-object" src="{{item.urlToImage}}">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        <a target="_blank" [href]="item.url">{{item.title}}</a></h4>
+                                    <h5 *ngIf="item?.author !== null"> <i>by {{item.author}}</i></h5>
+                                    <p>{{item.description}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+      <!-- <div class="time-wrapper">
+          <div class="time">{{currentTime | date: 'shortTime'}}</div>
+          <div class="date">{{currentTime | date: 'E LLL d y'}}</div>
+      </div> -->
+  </app-widget-full>
+</app-widget>
